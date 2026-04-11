@@ -6,7 +6,6 @@ import WhatIsMarzi from "@/components/WhatIsMarzi";
 import Testimonials from "@/components/Testimonials";
 import CtaBanner from "@/components/CtaBanner";
 
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-white">
