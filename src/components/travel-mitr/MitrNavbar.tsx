@@ -8,7 +8,7 @@ export default function MitrNavbar() {
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <Link href="/travel-mitr" className="flex items-center gap-2">
+        <Link href="/travel-assistance" className="flex items-center gap-2">
           <Image
             src={LOGO.src}
             alt={LOGO.alt}

@@ -1,10 +1,33 @@
 "use client";
-
+ 
 import { motion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Plane, Bed, HeartPulse, Compass } from "lucide-react";
 import { HELP_CARDS } from "@/data/travelMitr";
 
-export default function HelpCards() {
+type HelpCardData = {
+  heading: string;
+  subtitle: string;
+  bulletMarker?: string;
+  cards: Array<{
+    title: string;
+    subtitle?: string;
+    iconType?: string;
+    points: string[];
+  }>;
+};
+
+type HelpCardsProps = {
+  data?: HelpCardData;
+};
+
+const ICONS: Record<string, React.ReactNode> = {
+  flights: <Plane size={20} strokeWidth={2.5} />,
+  hotels: <Bed size={20} strokeWidth={2.5} />,
+  health: <HeartPulse size={20} strokeWidth={2.5} />,
+  transport: <Compass size={20} strokeWidth={2.5} />,
+};
+
+export default function HelpCards({ data = HELP_CARDS }: HelpCardsProps) {
   return (
     <section className="bg-white py-16 sm:py-24 px-6 sm:px-10 lg:px-20">
       <div className="max-w-6xl mx-auto">
@@ -15,14 +38,14 @@ export default function HelpCards() {
           transition={{ duration: 0.6 }}
           className="text-center text-3xl sm:text-4xl font-bold text-gray-900 mb-2 font-[family-name:var(--font-playfair)]"
         >
-          {HELP_CARDS.heading}
+          {data.heading}
         </motion.h2>
         <p className="text-center text-gray-500 mb-12 max-w-xl mx-auto font-medium">
-          {HELP_CARDS.subtitle}
+          {data.subtitle}
         </p>
-
+ 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {HELP_CARDS.cards.map((card, idx) => (
+          {data.cards.map((card, idx) => (
             <motion.div
               key={card.title}
               initial={{ opacity: 0, y: 20 }}
@@ -33,12 +56,20 @@ export default function HelpCards() {
             >
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-pink-100 flex items-center justify-center text-primary">
-                   {/* Icon placeholder based on category */}
-                   <Check size={20} strokeWidth={2.5} />
+                   {card.iconType && ICONS[card.iconType] ? (
+                     ICONS[card.iconType]
+                   ) : (
+                     <Check size={20} strokeWidth={2.5} />
+                   )}
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 font-[family-name:var(--font-playfair)]">
-                  {card.title}
-                </h3>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 font-[family-name:var(--font-playfair)]">
+                    {card.title}
+                  </h3>
+                  {card.subtitle && (
+                    <p className="text-xs text-gray-500 font-medium">{card.subtitle}</p>
+                  )}
+                </div>
               </div>
               <ul className="space-y-4">
                 {card.points.map((point) => (
@@ -47,7 +78,11 @@ export default function HelpCards() {
                     className="flex items-start gap-3 text-sm sm:text-base text-gray-700 leading-relaxed font-medium"
                   >
                     <span className="mt-1 flex-shrink-0 text-orange-400">
-                      <Check size={16} strokeWidth={3} />
+                      {data.bulletMarker ? (
+                        <span className="text-lg leading-none">{data.bulletMarker}</span>
+                      ) : (
+                        <Check size={16} strokeWidth={3} />
+                      )}
                     </span>
                     <span>{point}</span>
                   </li>
