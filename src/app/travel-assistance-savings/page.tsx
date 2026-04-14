@@ -6,15 +6,15 @@ import HowItWorks from "@/components/travel-mitr/HowItWorks";
 import Reasons from "@/components/travel-mitr/Reasons";
 import StillUnsure from "@/components/travel-mitr/StillUnsure";
 import MitrFooter from "@/components/travel-mitr/MitrFooter";
-import { INQUIRY_SOURCE, TRAVEL_SAVINGS_HERO } from "@/data/travelMitr";
-
+import { INQUIRY_SOURCE, TRAVEL_SAVINGS_HERO, HELP_SAVINGS_CARDS } from "@/data/travelMitr";
+ 
 export const metadata: Metadata = {
   title: "Marzi Mitr — Save more on every trip",
   description:
     "Marzi Mitr is a real person who helps you find the best deals on flights, hotels and transport — so you travel well and spend less.",
   robots: { index: false, follow: false },
 };
-
+ 
 export default function TravelMitrSavingsPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -25,7 +25,7 @@ export default function TravelMitrSavingsPage() {
         description={TRAVEL_SAVINGS_HERO.description}
         source={INQUIRY_SOURCE.SAVINGS}
       />
-      <HelpCards />
+      <HelpCards data={HELP_SAVINGS_CARDS} />
       <HowItWorks />
       <Reasons />
       <StillUnsure />

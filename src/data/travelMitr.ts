@@ -1,4 +1,4 @@
-// ─── Travel Mitr — content for /travel-mitr ─────────────────────
+// ─── Travel Assistance — content for /travel-assistance ──────────
 //
 // Edit copy here without touching component code. Phone numbers,
 // CTAs, card text, and form labels are all in this single file.
@@ -30,7 +30,7 @@ export const INQUIRY_SOURCE = {
 
 export type InquirySource = (typeof INQUIRY_SOURCE)[keyof typeof INQUIRY_SOURCE];
 
-// Variant copy for the /travel-mitr-savings route. Same form, same sections —
+// Variant copy for the /travel-assistance-savings route. Same form, same sections —
 // only the hero headline + sub-copy differ. Pass these as props to <TravelHero />.
 export const TRAVEL_SAVINGS_HERO = {
   headline: "Travelling?",
@@ -97,6 +97,54 @@ export const HELP_CARDS = {
         "What food is safe and easy on the stomach",
         "Easy ways to stay in touch with family",
         "Someone to call if anything feels off",
+      ],
+    },
+  ],
+};
+
+export const HELP_SAVINGS_CARDS = {
+  heading: "Where We Save You Money",
+  subtitle: "Real advice that keeps more money in your pocket.",
+  bulletMarker: "✦",
+  cards: [
+    {
+      title: "Save on flights",
+      iconType: "flights",
+      points: [
+        "Find the cheapest comfortable flights for your dates",
+        "Avoid overpriced last-minute bookings",
+        "Know the best time to book for lowest fares",
+        "Compare airlines without spending hours online",
+      ],
+    },
+    {
+      title: "Save on hotels",
+      subtitle: "No commissions, only advice",
+      iconType: "hotels",
+      points: [
+        "Get honest recommendations for affordable, safe stays",
+        "Avoid tourist-trap pricing near popular spots",
+        "Find deals on senior-friendly hotels",
+        "Know when to book for the best rates",
+      ],
+    },
+    {
+      title: "Save on insurance & health",
+      iconType: "health",
+      points: [
+        "Don't overpay for travel insurance you don't need",
+        "Find the right coverage at the right price",
+        "Avoid unnecessary medical costs abroad",
+        "Know which vaccinations are free vs. paid",
+      ],
+    },
+    {
+      title: "Save on local transport",
+      iconType: "transport",
+      points: [
+        "Avoid overpriced taxis and tourist traps",
+        "Know the cheapest way to get around locally",
+        "Find affordable day-trip options",
       ],
     },
   ],
