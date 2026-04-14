@@ -155,6 +155,7 @@ export type MedicineAssessmentResponse = {
     quantity_guidance: string | null;
     if_run_out_at_destination: string | null;
   }>;
+  ai_output: Record<string, unknown> | null;
   created: string;
 };
 

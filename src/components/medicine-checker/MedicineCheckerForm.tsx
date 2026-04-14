@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ArrowLeft, Plus, Printer, X } from "lucide-react";
+import MedicineAIDocument from "./MedicineAIDocument";
 import MedicineDocument from "./MedicineDocument";
 import {
   Checkbox,
@@ -212,8 +213,10 @@ export default function MedicineCheckerForm() {
     }
   };
 
-  // ─── Success view: show the branded document + print/reset ───────
+  // ─── Success: show AI document if available, else manual document ──
   if (status === "success" && result) {
+    const hasAI = result.ai_output && !("error" in result.ai_output) && Object.keys(result.ai_output).length > 0;
+
     return (
       <div className="pb-16">
         <div className="no-print mx-auto max-w-[820px] px-4 pt-6 pb-2 flex flex-wrap gap-3">
@@ -232,7 +235,7 @@ export default function MedicineCheckerForm() {
             <ArrowLeft size={18} /> Start a new assessment
           </button>
         </div>
-        <MedicineDocument data={result} />
+        {hasAI ? <MedicineAIDocument data={result} /> : <MedicineDocument data={result} />}
       </div>
     );
   }
