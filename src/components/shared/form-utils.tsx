@@ -13,9 +13,6 @@ export const INPUT =
 
 export const TEXTAREA = `${INPUT} min-h-[80px] resize-y`;
 
-export const INPUT_SM =
-  "w-full rounded-lg border border-gray-200 bg-white px-2.5 py-2 text-[13px] text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-primary/40 focus:border-primary";
-
 // ─── DRF response helpers ───────────────────────────────────────
 
 /**
@@ -82,23 +79,6 @@ export function Field({
   return (
     <label className={`block ${className}`}>
       <span className="mb-1 block text-sm font-medium text-gray-700">{label}</span>
-      {children}
-    </label>
-  );
-}
-
-export function FieldSm({
-  label,
-  children,
-  className = "",
-}: {
-  label: string;
-  children: React.ReactNode;
-  className?: string;
-}) {
-  return (
-    <label className={`block ${className}`}>
-      <span className="mb-0.5 block text-[11px] font-medium text-gray-500">{label}</span>
       {children}
     </label>
   );
