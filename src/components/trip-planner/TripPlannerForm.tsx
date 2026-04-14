@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowLeft, Printer } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ArrowLeft, Printer, RefreshCw } from "lucide-react";
 import ItineraryAIDocument from "./ItineraryAIDocument";
 import {
   extractError,
@@ -154,7 +154,7 @@ export default function TripPlannerForm() {
     }
   };
 
-  // ─── Success: show AI-generated document ───────────────────────
+  // ─── Success View ───────────────────────────────────────────────
   if (status === "success" && result) {
     const aiData = (result.ai_output ?? {}) as Record<string, unknown>;
     const hasAI = aiData && !("error" in aiData) && Object.keys(aiData).length > 0;
@@ -162,15 +162,13 @@ export default function TripPlannerForm() {
     return (
       <div className="pb-16">
         <div className="no-print mx-auto max-w-[820px] px-4 pt-6 pb-2 flex flex-wrap gap-3">
-          {hasAI && (
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-5 py-2.5 rounded-full transition-colors"
-            >
-              <Printer size={18} /> Download / print itinerary
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className="inline-flex items-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold px-5 py-2.5 rounded-full transition-colors"
+          >
+            <Printer size={18} /> Download / print itinerary
+          </button>
           <button
             type="button"
             onClick={() => { setForm({ ...EMPTY_INTAKE }); setStatus("idle"); setResult(null); }}
@@ -179,12 +177,12 @@ export default function TripPlannerForm() {
             <ArrowLeft size={18} /> New itinerary
           </button>
         </div>
+
         {hasAI ? (
           <ItineraryAIDocument data={aiData} refId={result.id} />
         ) : (
           <div className="mx-auto max-w-[820px] px-4 py-8 text-center">
-            <p className="text-red-600 font-medium">AI generation failed.</p>
-            <p className="text-sm text-gray-500 mt-1">{String((aiData as Record<string,unknown>)?.error || "Unknown error")}</p>
+            <p className="text-red-600 font-medium">No itinerary data available.</p>
           </div>
         )}
       </div>
@@ -203,11 +201,17 @@ export default function TripPlannerForm() {
         {/* ── 1. Traveller Details ───────────────────────────── */}
         <Section num={1} title="Traveller Details" subtitle="Sets the hard constraints — pace, transport, feasibility">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Field label="Number of travellers *">
+              <input type="text" required placeholder="e.g. 2" value={form.number_of_travelers} onChange={(e) => set("number_of_travelers", e.target.value)} className={INPUT} />
+            </Field>
             <Field label="Ages of all travellers *">
               <input type="text" required placeholder="e.g. 62, 65, 32" value={form.ages_of_travellers} onChange={(e) => set("ages_of_travellers", e.target.value)} className={INPUT} />
             </Field>
-            <Field label="Number of travellers *">
-              <input type="text" required placeholder="e.g. 2" value={form.number_of_travelers} onChange={(e) => set("number_of_travelers", e.target.value)} className={INPUT} />
+            <Field label="Destination / Route *">
+              <input type="text" required placeholder="e.g. Kerala, Bhutan, Dehradun-Dharamsala-Amritsar" value={form.destination_route} onChange={(e) => set("destination_route", e.target.value)} className={INPUT} />
+            </Field>
+            <Field label="Trip duration (nights)">
+              <input type="text" placeholder="e.g. 7" value={form.trip_duration_nights} onChange={(e) => set("trip_duration_nights", e.target.value)} className={INPUT} />
             </Field>
             <Field label="Gender mix">
               <input type="text" placeholder="e.g. 1M 1F, Solo female, 2F 2M" value={form.gender_mix} onChange={(e) => set("gender_mix", e.target.value)} className={INPUT} />
@@ -308,17 +312,7 @@ export default function TripPlannerForm() {
           </Field>
         </Section>
 
-        {/* ── 9. Destination ─────────────────────────────────── */}
-        <Section num={9} title="Destination" subtitle="The places you want to visit">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Field label="Destination / Route *">
-              <input type="text" required placeholder="e.g. Kerala, Bhutan, Dehradun-Dharamsala-Amritsar" value={form.destination_route} onChange={(e) => set("destination_route", e.target.value)} className={INPUT} />
-            </Field>
-            <Field label="Trip duration (nights)">
-              <input type="text" placeholder="e.g. 7" value={form.trip_duration_nights} onChange={(e) => set("trip_duration_nights", e.target.value)} className={INPUT} />
-            </Field>
-          </div>
-        </Section>
+
 
         {/* ── Submit ─────────────────────────────────────────── */}
         <div className="pt-2">

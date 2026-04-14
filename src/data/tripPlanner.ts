@@ -6,7 +6,7 @@ export const TRIP_ITINERARY_ENDPOINT = `${API_BASE_URL}/api/home/trip-itinerary/
 export const TRIP_PLANNER_HERO = {
   title: "Plan Your Perfect Senior Journey",
   subtitle:
-    "Fill in all 9 sections below. Every answer shapes your itinerary — the system designs around your pace, comfort and preferences. No detail is too small.",
+    "Fill in all 8 sections below. Every answer shapes your itinerary — the system designs around your pace, comfort and preferences. No detail is too small.",
 } as const;
 
 // ─── Section 2: Trip Purpose (multi-select chips) ────────────────
@@ -125,6 +125,8 @@ export type TripIntakeResponse = {
   other_avoidances: string | null;
   destination_route: string | null;
   trip_duration_nights: number | null;
+  ai_status: "idle" | "pending" | "processing" | "success" | "failure";
+  ai_error: string | null;
   ai_output: Record<string, unknown> | null;
   created: string;
 };

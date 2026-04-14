@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowLeft, Plus, Printer, X } from "lucide-react";
 import MedicineAIDocument from "./MedicineAIDocument";
 import MedicineDocument from "./MedicineDocument";
@@ -10,19 +10,15 @@ import {
   Field,
   INPUT,
   SelectField,
-  TEXTAREA,
   unwrap,
 } from "@/components/shared/form-utils";
 import {
-  CARRY_STATUS_OPTIONS,
   DOCUMENT_CHECKLIST,
   EMPTY_ASSESSMENT,
   EMPTY_MEDICINE_ITEM,
   MEDICINE_ASSESSMENT_ENDPOINT,
-  MEDICINE_CHECKER_CONTACT,
   MEDICINE_CHECKER_HERO,
   MEDICINE_FORM_OPTIONS,
-  type CarryStatus,
   type DocumentChecklistKey,
   type MedicineAssessmentInput,
   type MedicineAssessmentResponse,
@@ -213,7 +209,7 @@ export default function MedicineCheckerForm() {
     }
   };
 
-  // ─── Success: show AI document if available, else manual document ──
+  // ─── Success View ───────────────────────────────────────────────
   if (status === "success" && result) {
     const hasAI = result.ai_output && !("error" in result.ai_output) && Object.keys(result.ai_output).length > 0;
 
@@ -235,7 +231,12 @@ export default function MedicineCheckerForm() {
             <ArrowLeft size={18} /> Start a new assessment
           </button>
         </div>
-        {hasAI ? <MedicineAIDocument data={result} /> : <MedicineDocument data={result} />}
+
+        {hasAI ? (
+          <MedicineAIDocument data={result} />
+        ) : (
+          <MedicineDocument data={result} />
+        )}
       </div>
     );
   }
@@ -443,77 +444,6 @@ export default function MedicineCheckerForm() {
                     onChange={(v) => updateItem(idx, { is_emergency_use: v })}
                   />
                 </div>
-
-                {/* ── Divider + Team assessment per medicine ── */}
-                <div className="mt-5 mb-4 flex items-center gap-3">
-                  <div className="flex-1 border-t border-gray-300" />
-                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-                    Team assessment
-                  </span>
-                  <div className="flex-1 border-t border-gray-300" />
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <SelectField
-                    label="Carry status"
-                    value={item.carry_status}
-                    options={CARRY_STATUS_OPTIONS}
-                    onChange={(v) =>
-                      updateItem(idx, { carry_status: v as CarryStatus })
-                    }
-                  />
-                  <Field label="Active ingredient">
-                    <input
-                      type="text"
-                      placeholder="e.g. Paracetamol (acetaminophen) — non-opioid analgesic"
-                      value={item.active_ingredient}
-                      onChange={(e) =>
-                        updateItem(idx, { active_ingredient: e.target.value })
-                      }
-                      className={INPUT}
-                    />
-                  </Field>
-                  <Field label="Import status in destination" className="sm:col-span-2">
-                    <textarea
-                      placeholder="Any note"
-                      value={item.import_status}
-                      onChange={(e) =>
-                        updateItem(idx, { import_status: e.target.value })
-                      }
-                      className={TEXTAREA}
-                    />
-                  </Field>
-                  <Field label="Documents to carry" className="sm:col-span-2">
-                    <textarea
-                      placeholder="e.g. Original packaging · "
-                      value={item.documents_to_carry}
-                      onChange={(e) =>
-                        updateItem(idx, { documents_to_carry: e.target.value })
-                      }
-                      className={TEXTAREA}
-                    />
-                  </Field>
-                  <Field label="Quantity guidance" className="sm:col-span-2">
-                    <textarea
-                      placeholder="e.g. For 7 days at once daily, 10–14 tablets is appropriate. No stated quantity cap."
-                      value={item.quantity_guidance}
-                      onChange={(e) =>
-                        updateItem(idx, { quantity_guidance: e.target.value })
-                      }
-                      className={TEXTAREA}
-                    />
-                  </Field>
-                  <Field label="If you run out at destination" className="sm:col-span-2">
-                    <textarea
-                      placeholder="Place where Medicine can be available"
-                      value={item.if_run_out_at_destination}
-                      onChange={(e) =>
-                        updateItem(idx, { if_run_out_at_destination: e.target.value })
-                      }
-                      className={TEXTAREA}
-                    />
-                  </Field>
-                </div>
               </div>
             ))}
           </div>
@@ -542,34 +472,7 @@ export default function MedicineCheckerForm() {
           </div>
         </section>
 
-        {/* ─── 3. Team assessment (overall) ────────────────────── */}
-        <section className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 shadow-sm">
-          <h2 className="text-lg font-semibold mb-4">Overall team assessment</h2>
-          <div className="space-y-4">
-            <Field label="Overall recommendation">
-              <textarea
-                placeholder="Summary recommendation for the traveller"
-                value={form.overall_recommendation}
-                onChange={(e) =>
-                  updateField("overall_recommendation", e.target.value)
-                }
-                className={TEXTAREA}
-              />
-            </Field>
-            <Field label="Important warnings">
-              <textarea
-                placeholder="Critical warnings or alerts for the traveller"
-                value={form.important_warnings}
-                onChange={(e) =>
-                  updateField("important_warnings", e.target.value)
-                }
-                className={TEXTAREA}
-              />
-            </Field>
-          </div>
-        </section>
-
-        {/* ─── Submit + info ───────────────────────────────────── */}
+        {/* ─── Submit ──────────────────────────────────────────── */}
         <div className="space-y-4">
           <button
             type="submit"
@@ -582,12 +485,6 @@ export default function MedicineCheckerForm() {
           {status === "error" && errorMsg && (
             <p className="text-sm text-red-600">{errorMsg}</p>
           )}
-
-          <div className="rounded-xl border border-primary/20 bg-primary/5 p-4 text-sm text-gray-700 leading-relaxed">
-            Results delivered as a <strong>branded document</strong> — Marzi logo header ·
-            Travel Mitr footer · {MEDICINE_CHECKER_CONTACT.name}:{" "}
-            {MEDICINE_CHECKER_CONTACT.phone} · {MEDICINE_CHECKER_CONTACT.website}.
-          </div>
         </div>
       </form>
     </section>

@@ -12,6 +12,12 @@ export const metadata: Metadata = {
   title: "Marzi Mitr — Save more on every trip",
   description:
     "Marzi Mitr is a real person who helps you find the best deals on flights, hotels and transport — so you travel well and spend less.",
+  openGraph: {
+    title: "Marzi Mitr — Save more on every trip",
+    description:
+      "Marzi Mitr is a real person who helps you find the best deals on flights, hotels and transport — so you travel well and spend less.",
+    type: "website",
+  },
   robots: { index: false, follow: false },
 };
 

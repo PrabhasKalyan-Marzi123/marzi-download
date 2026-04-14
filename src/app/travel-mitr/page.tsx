@@ -8,6 +8,15 @@ import StillUnsure from "@/components/travel-mitr/StillUnsure";
 import MitrFooter from "@/components/travel-mitr/MitrFooter";
 
 export const metadata: Metadata = {
+  title: "Marzi Travel Mitr — Friendly travel guidance for 50+",
+  description:
+    "Talk to Marzi Travel Mitr — friendly travel guidance for travellers 50+. Get clear answers on bookings, health, safety, and what to expect on the way.",
+  openGraph: {
+    title: "Marzi Travel Mitr — Friendly travel guidance for 50+",
+    description:
+      "Talk to Marzi Travel Mitr — friendly travel guidance for travellers 50+. Get clear answers on bookings, health, safety, and what to expect on the way.",
+    type: "website",
+  },
   robots: { index: false, follow: false },
 };
 
