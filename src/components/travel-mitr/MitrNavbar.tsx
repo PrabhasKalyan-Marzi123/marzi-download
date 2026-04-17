@@ -6,15 +6,15 @@ import { LOGO, NAVBAR, PLAY_STORE_URL } from "@/data/content";
 
 export default function MitrNavbar() {
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <Link href="/travel-assistance" className="flex items-center gap-2">
+    <header className="sticky top-0 z-[100] bg-white/70 backdrop-blur-xl border-b border-gray-100/50">
+      <div className="max-w-7xl mx-auto px-6 sm:px-10 flex items-center justify-between h-20">
+        <Link href="/travel-assistance" className="flex items-center gap-2 transition-opacity hover:opacity-90">
           <Image
             src={LOGO.src}
             alt={LOGO.alt}
-            width={80}
-            height={32}
-            className="h-10 w-auto"
+            width={85}
+            height={34}
+            className="h-9 w-auto"
             priority
           />
         </Link>
