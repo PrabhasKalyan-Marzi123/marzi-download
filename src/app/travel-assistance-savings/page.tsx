@@ -2,26 +2,27 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import MitrNavbar from "@/components/travel-mitr/MitrNavbar";
 import TravelHero from "@/components/travel-mitr/TravelHero";
+import Intro from "@/components/travel-mitr/Intro";
 import HelpCards from "@/components/travel-mitr/HelpCards";
-import HowItWorks from "@/components/travel-mitr/HowItWorks";
 import Reasons from "@/components/travel-mitr/Reasons";
+import HowItWorks from "@/components/travel-mitr/HowItWorks";
 import StillUnsure from "@/components/travel-mitr/StillUnsure";
 import MitrFooter from "@/components/travel-mitr/MitrFooter";
-import { INQUIRY_SOURCE, TRAVEL_SAVINGS_HERO, HELP_SAVINGS_CARDS } from "@/data/travelMitr";
- 
+import { INQUIRY_SOURCE, SAVINGS_CONTENT } from "@/data/travelMitr";
+
 export const metadata: Metadata = {
-  title: "Marzi Mitr — Save more on every trip",
+  title: "Marzi Mitr — Say goodbye to overpaying for travel",
   description:
-    "Marzi Mitr is a real person who helps you find the best deals on flights, hotels and transport — so you travel well and spend less.",
+    "Marzi Travel Mitr helps you get the best value — without compromising on quality. Exclusively for travellers above 50.",
   openGraph: {
-    title: "Marzi Mitr — Save more on every trip",
+    title: "Marzi Mitr — Say goodbye to overpaying for travel",
     description:
-      "Marzi Mitr is a real person who helps you find the best deals on flights, hotels and transport — so you travel well and spend less.",
+      "Marzi Travel Mitr helps you get the best value — without compromising on quality. Exclusively for travellers above 50.",
     type: "website",
   },
   robots: { index: false, follow: false },
 };
- 
+
 export default function TravelMitrSavingsPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -33,15 +34,16 @@ export default function TravelMitrSavingsPage() {
       </noscript>
       <MitrNavbar />
       <TravelHero
-        headline={TRAVEL_SAVINGS_HERO.headline}
-        headlineAccent={TRAVEL_SAVINGS_HERO.headlineAccent}
-        description={TRAVEL_SAVINGS_HERO.description}
+        headline={SAVINGS_CONTENT.hero.headline}
+        headlineAccent={SAVINGS_CONTENT.hero.headlineAccent}
+        description={SAVINGS_CONTENT.hero.description}
         source={INQUIRY_SOURCE.SAVINGS}
       />
-      <HelpCards data={HELP_SAVINGS_CARDS} />
-      <HowItWorks />
-      <Reasons />
-      <StillUnsure />
+      <Intro data={SAVINGS_CONTENT.intro} />
+      <HelpCards data={SAVINGS_CONTENT.help} />
+      <Reasons data={SAVINGS_CONTENT.reasons} />
+      <HowItWorks data={SAVINGS_CONTENT.how} />
+      <StillUnsure data={SAVINGS_CONTENT.unsure} />
       <MitrFooter />
     </div>
   );

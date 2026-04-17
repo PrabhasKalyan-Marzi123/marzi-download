@@ -15,7 +15,15 @@ const STATUS_COLOR: Record<string, { bg: string; text: string; border: string }>
 };
 
 export default function MedicineAIDocument({ data }: Props) {
-  const ai = (data.ai_output ?? {}) as { overall_recommendation?: string; important_warnings?: string; status_summary?: StatusSummary; items?: AIItem[]; destination_guidance?: DestGuidance; action_plan?: string[] };
+  const ai = (data.ai_output ?? {}) as {
+    overall_recommendation?: string;
+    important_warnings?: string;
+    status_summary?: StatusSummary;
+    items?: AIItem[];
+    destination_guidance?: DestGuidance;
+    action_plan?: string[];
+    custom_query_answer?: string;
+  };
   const aiItems = ai.items ?? [];
   const summary = ai.status_summary ?? {};
   const guidance = ai.destination_guidance ?? {};
