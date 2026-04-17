@@ -101,6 +101,7 @@ export type TripIntakeInput = {
   other_avoidances: string;
   destination_route: string;
   trip_duration_nights: string;
+  custom_query: string;
 };
 
 export type TripIntakeResponse = {
@@ -128,6 +129,8 @@ export type TripIntakeResponse = {
   ai_status: "idle" | "pending" | "processing" | "success" | "failure";
   ai_error: string | null;
   ai_output: Record<string, unknown> | null;
+  custom_query: string | null;
+  custom_query_answer: string | null;
   created: string;
 };
 
@@ -151,4 +154,5 @@ export const EMPTY_INTAKE: TripIntakeInput = {
   other_avoidances: "",
   destination_route: "",
   trip_duration_nights: "",
+  custom_query: "",
 };

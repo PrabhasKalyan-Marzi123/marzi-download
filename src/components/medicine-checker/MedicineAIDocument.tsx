@@ -132,6 +132,21 @@ export default function MedicineAIDocument({ data }: Props) {
             </div>
           )}
 
+          {/* Custom Query Answer */}
+          {ai.custom_query_answer && (
+            <div style={{ pageBreakInside: "avoid" }}>
+              <h2 className="text-sm font-bold mb-2 pb-1" style={{ borderBottom: "2px solid #821A52", color: "#821A52" }}>Your Custom Query & Response</h2>
+              <div className="rounded bg-gray-50 p-3 border border-gray-200">
+                {data.custom_query && (
+                  <p className="text-[11px] font-bold text-gray-600 mb-2">Q: {data.custom_query}</p>
+                )}
+                <p className="text-[11.5px] text-gray-700 leading-relaxed whitespace-pre-line">
+                  {ai.custom_query_answer}
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* Disclaimer */}
           <div className="rounded border-2 p-3 text-[10px] text-gray-600 leading-relaxed" style={{ borderColor: "#821A52", pageBreakInside: "avoid" }}>
             <strong style={{ color: "#821A52" }}>Important — please read</strong><br />

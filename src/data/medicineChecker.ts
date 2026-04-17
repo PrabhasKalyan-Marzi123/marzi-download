@@ -112,6 +112,8 @@ export type MedicineAssessmentInput = {
   important_warnings: string;
   // Items
   items: MedicineItemInput[];
+  // Custom Query
+  custom_query: string;
 };
 
 export type MedicineAssessmentResponse = {
@@ -158,6 +160,8 @@ export type MedicineAssessmentResponse = {
   ai_status: "idle" | "pending" | "processing" | "success" | "failure";
   ai_error: string | null;
   ai_output: Record<string, unknown> | null;
+  custom_query: string | null;
+  custom_query_answer: string | null;
   created: string;
 };
 
@@ -201,4 +205,5 @@ export const EMPTY_ASSESSMENT: MedicineAssessmentInput = {
   additional_documents_needed: "",
   important_warnings: "",
   items: [{ ...EMPTY_MEDICINE_ITEM }],
+  custom_query: "",
 };
