@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Check, Plane, Bed, HeartPulse, Compass } from "lucide-react";
 
 export type HelpCardData = {
@@ -28,7 +28,7 @@ const ICONS: Record<string, React.ReactNode> = {
   transport: <Compass size={24} strokeWidth={2.5} />,
 };
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -38,7 +38,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Check } from "lucide-react";
 
 export type ReasonsData = {
@@ -17,7 +17,7 @@ type ReasonsProps = {
   data: ReasonsData;
 };
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -27,7 +27,7 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
@@ -75,7 +75,7 @@ export default function Reasons({ data }: ReasonsProps) {
             <motion.div
               key={idx}
               variants={itemVariants}
-              whileHover={{ y: -8, shadow: "0 20px 40px rgba(0,0,0,0.08)" }}
+              whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.08)" }}
               className="group bg-white p-8 sm:p-10 rounded-[2.5rem] shadow-[0_4px_24px_rgba(0,0,0,0.02)] border border-gray-100/50 transition-all flex flex-col gap-6"
             >
               <div className="w-16 h-16 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500 transform group-hover:scale-110">
