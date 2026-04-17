@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowLeft, Plus, Printer, X } from "lucide-react";
+import { ArrowLeft, Plus, Printer, RefreshCw, X } from "lucide-react";
 import MedicineAIDocument from "./MedicineAIDocument";
 import MedicineDocument from "./MedicineDocument";
 import {
@@ -38,6 +38,30 @@ export default function MedicineCheckerForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [result, setResult] = useState<MedicineAssessmentResponse | null>(null);
+
+  // ─── Polling for AI status ───────────────────────────────────
+  useEffect(() => {
+    if (!result || result.ai_status === "success" || result.ai_status === "failure") {
+      return;
+    }
+
+    const intervalId = setInterval(async () => {
+      try {
+        // SimpleRouter: api/home/medicine-assessment/create/<uuid>/
+        const url = `${MEDICINE_ASSESSMENT_ENDPOINT}${result.uuid}/`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const body = await res.json();
+          const updated = unwrap<MedicineAssessmentResponse>(body);
+          setResult(updated);
+        }
+      } catch (err) {
+        console.error("Polling error:", err);
+      }
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [result]);
 
   // Any edit after a terminal state should clear the banner so the user
   // isn't looking at a stale error while correcting their input.
@@ -174,6 +198,7 @@ export default function MedicineCheckerForm() {
         quantity_guidance: it.quantity_guidance.trim() || null,
         if_run_out_at_destination: it.if_run_out_at_destination.trim() || null,
       })),
+      custom_query: form.custom_query.trim() || null,
     };
 
     try {
@@ -232,7 +257,23 @@ export default function MedicineCheckerForm() {
           </button>
         </div>
 
-        {hasAI ? (
+        {result.ai_status === "pending" || result.ai_status === "processing" ? (
+          <div className="mx-auto max-w-[820px] px-4 py-20 text-center bg-white rounded-2xl border border-gray-100 shadow-sm mt-4">
+            <RefreshCw className="mx-auto h-10 w-10 text-primary animate-spin mb-4" />
+            <h3 className="text-xl font-bold mb-2">Generating your assessment...</h3>
+            <p className="text-gray-500">
+              Our AI is checking your medicines against local regulations. This usually takes 20-40 seconds.
+            </p>
+          </div>
+        ) : result.ai_status === "failure" ? (
+          <div className="mx-auto max-w-[820px] px-4 py-12 text-center bg-red-50 rounded-2xl border border-red-100 mt-4">
+            <h3 className="text-lg font-bold text-red-700 mb-2">Assessment Failed</h3>
+            <p className="text-red-600 mb-4">{result.ai_error || "Unknown AI error"}</p>
+            <button onClick={() => setStatus("idle")} className="text-primary font-semibold underline">
+              Try again
+            </button>
+          </div>
+        ) : hasAI ? (
           <MedicineAIDocument data={result} />
         ) : (
           <MedicineDocument data={result} />
@@ -470,6 +511,22 @@ export default function MedicineCheckerForm() {
               />
             ))}
           </div>
+        </section>
+
+        {/* ─── 4. Custom Query ─────────────────────────────────── */}
+        <section className="bg-white rounded-2xl border border-gray-200 p-5 sm:p-6 shadow-sm">
+          <h2 className="text-lg font-semibold mb-2">Anything else?</h2>
+          <p className="text-sm text-gray-500 mb-4">
+            Ask any specific questions you have about your medicines or destination. Our AI will answer them in the final document.
+          </p>
+          <Field label="Your custom question">
+            <textarea
+              placeholder="e.g. Can I carry Ayurvedic medicine? Is there anything specific about carrying insulin to this country?"
+              value={form.custom_query}
+              onChange={(e) => updateField("custom_query", e.target.value)}
+              className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[15px] outline-none focus:border-primary min-h-[100px]"
+            />
+          </Field>
         </section>
 
         {/* ─── Submit ──────────────────────────────────────────── */}

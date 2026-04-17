@@ -13,6 +13,7 @@ export default function ItineraryAIDocument({ data, refId }: Props) {
   const rejected = (data.rejected_options ?? []) as Array<{ option: string; reason: string; constraint: string }>;
   const genEv = (data.overall_gen_ev ?? {}) as { score?: number; comfort?: number; accessibility?: number; safety?: number; label?: string; summary?: string };
   const dayScores = (data.day_scores ?? []) as Array<{ day: number; title: string; note: string; score: number; type: string; label: string }>;
+  const customQueryAnswer = (data.custom_query_answer ?? "") as string;
 
   const PRI = "#821A52";
 
@@ -193,6 +194,17 @@ export default function ItineraryAIDocument({ data, refId }: Props) {
                   <span className="font-bold" style={{ color: PRI }}>{ds.score}/100</span>
                 </div>
               ))}
+            </Sec>
+          )}
+
+          {/* Custom Query Answer */}
+          {customQueryAnswer && (
+            <Sec title="Your Custom Query & Response" pri={PRI}>
+              <div className="rounded bg-gray-50 p-3 border border-gray-200">
+                <p className="text-[11.5px] text-gray-700 leading-relaxed whitespace-pre-line">
+                  {customQueryAnswer}
+                </p>
+              </div>
             </Sec>
           )}
         </div>

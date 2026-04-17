@@ -33,6 +33,29 @@ export default function TripPlannerForm() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [result, setResult] = useState<TripIntakeResponse | null>(null);
 
+  // ─── Polling for AI status ───────────────────────────────────
+  useEffect(() => {
+    if (!result || result.ai_status === "success" || result.ai_status === "failure") {
+      return;
+    }
+
+    const intervalId = setInterval(async () => {
+      try {
+        const url = `${TRIP_ITINERARY_ENDPOINT}${result.uuid}/`;
+        const res = await fetch(url);
+        if (res.ok) {
+          const body = await res.json();
+          const updated = unwrap<TripIntakeResponse>(body);
+          setResult(updated);
+        }
+      } catch (err) {
+        console.error("Polling error:", err);
+      }
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [result]);
+
   const clearErr = () => {
     setStatus((p) => (p === "error" ? "idle" : p));
     setErrorMsg(null);
@@ -131,6 +154,7 @@ export default function TripPlannerForm() {
       other_avoidances: form.other_avoidances.trim() || null,
       destination_route: form.destination_route.trim(),
       trip_duration_nights: nights,
+      custom_query: form.custom_query.trim() || null,
     };
 
     try {
@@ -177,8 +201,24 @@ export default function TripPlannerForm() {
             <ArrowLeft size={18} /> New itinerary
           </button>
         </div>
-
-        {hasAI ? (
+        
+        {result.ai_status === "pending" || result.ai_status === "processing" ? (
+          <div className="mx-auto max-w-[820px] px-4 py-20 text-center bg-white rounded-2xl border border-gray-100 shadow-sm mt-4">
+            <RefreshCw className="mx-auto h-10 w-10 text-primary animate-spin mb-4" />
+            <h3 className="text-xl font-bold mb-2 font-[family-name:var(--font-playfair)] italic">Designing your perfect journey...</h3>
+            <p className="text-gray-500 text-sm">
+              Our AI is crafting a detailed itinerary based on your preferences. This usually takes 30-60 seconds.
+            </p>
+          </div>
+        ) : result.ai_status === "failure" ? (
+          <div className="mx-auto max-w-[820px] px-4 py-12 text-center bg-red-50 rounded-2xl border border-red-100 mt-4">
+            <h3 className="text-lg font-bold text-red-700 mb-2">Itinerary Generation Failed</h3>
+            <p className="text-red-600 mb-4">{result.ai_error || "Unknown AI error"}</p>
+            <button onClick={() => setStatus("idle")} className="text-primary font-semibold underline">
+              Try again
+            </button>
+          </div>
+        ) : hasAI ? (
           <ItineraryAIDocument data={aiData} refId={result.id} />
         ) : (
           <div className="mx-auto max-w-[820px] px-4 py-8 text-center">
@@ -313,6 +353,17 @@ export default function TripPlannerForm() {
         </Section>
 
 
+        {/* ── 9. Custom Query ─────────────────────────────────── */}
+        <Section num={9} title="Anything Else?" subtitle="Ask any specific question you want our AI to answer">
+          <Field label="Your custom question">
+            <textarea
+              placeholder="e.g. Is tap water safe in Tokyo? Are there many stairs in the old city areas? Best time to visit temples to avoid crowds?"
+              value={form.custom_query}
+              onChange={(e) => set("custom_query", e.target.value)}
+              className={TEXTAREA}
+            />
+          </Field>
+        </Section>
 
         {/* ── Submit ─────────────────────────────────────────── */}
         <div className="pt-2">
