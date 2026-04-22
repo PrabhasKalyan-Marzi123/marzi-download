@@ -129,8 +129,111 @@ export default function TravelHero({
     }
   };
 
+  const renderForm = (idSuffix: string) => (
+    <div className="bg-white/80 backdrop-blur-xl rounded-[1.5rem] sm:rounded-[2.5rem] shadow-[0_32px_80px_rgba(0,0,0,0.08)] border border-white/50 p-5 sm:p-10 w-full max-w-md relative overflow-hidden group">
+      <div className="absolute top-0 right-0 w-24 h-24 sm:w-32 sm:h-32 bg-primary/5 rounded-full -mr-12 -mt-12 sm:-mr-16 sm:-mt-16 transition-transform group-hover:scale-110" />
+      
+      <div className="relative z-10">
+        <h2 className="text-xl sm:text-3xl font-extrabold text-gray-950 mb-1 sm:mb-2 font-[family-name:var(--font-playfair)]">
+          {TRAVEL_HERO.formTitle}
+        </h2>
+        <p className="text-[13px] sm:text-base text-gray-500 mb-4 sm:mb-8 font-medium">{TRAVEL_HERO.formSubtitle}</p>
+
+        <form onSubmit={onSubmit} className="space-y-3 sm:space-y-5" noValidate>
+          <div className="space-y-1 sm:space-y-1.5">
+            <label htmlFor={`tm-name-${idSuffix}`} className={`text-[10px] sm:text-xs font-bold ml-1 uppercase tracking-wider transition-colors ${fieldErrors.name ? "text-red-500" : "text-gray-700"}`}>
+              {TRAVEL_HERO.fields.name.label}
+            </label>
+            <input
+              id={`tm-name-${idSuffix}`}
+              type="text"
+              value={form.name}
+              onChange={update("name")}
+              placeholder={TRAVEL_HERO.fields.name.placeholder}
+              className={`w-full bg-gray-50/50 border rounded-xl sm:rounded-2xl px-3 py-2.5 sm:px-5 sm:py-4 text-[14px] sm:text-[15px] focus:bg-white focus:outline-none focus:ring-4 transition-all font-medium ${
+                fieldErrors.name 
+                  ? "border-red-200 focus:ring-red-100 focus:border-red-400" 
+                  : "border-gray-100 focus:ring-primary/10 focus:border-primary"
+              }`}
+              required
+            />
+            {fieldErrors.name && (
+              <p className="text-[11px] font-bold text-red-500 ml-1 animate-in fade-in slide-in-from-top-1">{fieldErrors.name}</p>
+            )}
+          </div>
+
+          <div className="space-y-1 sm:space-y-1.5">
+            <label htmlFor={`tm-phone-${idSuffix}`} className={`text-[10px] sm:text-xs font-bold ml-1 uppercase tracking-wider transition-colors ${fieldErrors.phone ? "text-red-500" : "text-gray-700"}`}>
+              {TRAVEL_HERO.fields.phone.label}
+            </label>
+            <input
+              id={`tm-phone-${idSuffix}`}
+              type="tel"
+              inputMode="numeric"
+              pattern="\d{10}"
+              value={form.phone}
+              onChange={update("phone")}
+              placeholder={TRAVEL_HERO.fields.phone.placeholder}
+              className={`w-full bg-gray-50/50 border rounded-xl sm:rounded-2xl px-3 py-2.5 sm:px-5 sm:py-4 text-[14px] sm:text-[15px] focus:bg-white focus:outline-none focus:ring-4 transition-all font-medium ${
+                fieldErrors.phone 
+                  ? "border-red-200 focus:ring-red-100 focus:border-red-400" 
+                  : "border-gray-100 focus:ring-primary/10 focus:border-primary"
+              }`}
+              required
+            />
+            {fieldErrors.phone && (
+              <p className="text-[11px] font-bold text-red-500 ml-1 animate-in fade-in slide-in-from-top-1">{fieldErrors.phone}</p>
+            )}
+          </div>
+
+          <div className="space-y-1 sm:space-y-1.5">
+            <label htmlFor={`tm-age-${idSuffix}`} className={`text-[10px] sm:text-xs font-bold ml-1 uppercase tracking-wider transition-colors ${fieldErrors.age ? "text-red-500" : "text-gray-700"}`}>
+              {TRAVEL_HERO.fields.age.label}
+            </label>
+            <input
+              id={`tm-age-${idSuffix}`}
+              type="number"
+              inputMode="numeric"
+              min={18}
+              max={110}
+              value={form.age}
+              onChange={update("age")}
+              placeholder={TRAVEL_HERO.fields.age.placeholder}
+              className={`w-full bg-gray-50/50 border rounded-xl sm:rounded-2xl px-3 py-2.5 sm:px-5 sm:py-4 text-[14px] sm:text-[15px] focus:bg-white focus:outline-none focus:ring-4 transition-all font-medium ${
+                fieldErrors.age 
+                  ? "border-red-200 focus:ring-red-100 focus:border-red-400" 
+                  : "border-gray-100 focus:ring-primary/10 focus:border-primary"
+              }`}
+              required
+            />
+            {fieldErrors.age && (
+              <p className="text-[11px] font-bold text-red-500 ml-1 animate-in fade-in slide-in-from-top-1">{fieldErrors.age}</p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            disabled={status === "submitting"}
+            className="w-full bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-[15px] sm:text-lg font-bold py-3 sm:py-4.5 rounded-full transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:translate-y-[-2px] active:translate-y-0 mt-1 sm:mt-2"
+          >
+            {status === "submitting" ? "Sending Details…" : TRAVEL_HERO.formCtaLabel}
+          </button>
+
+          {status === "success" && (
+            <p className="text-sm font-bold text-emerald-600 text-center mt-4">
+              ✓ Success! We&apos;ll call you shortly.
+            </p>
+          )}
+          {status === "error" && errorMsg && !Object.keys(fieldErrors).length && (
+            <p className="text-sm font-medium text-red-500 text-center mt-4">{errorMsg}</p>
+          )}
+        </form>
+      </div>
+    </div>
+  );
+
   return (
-    <section className="relative isolate overflow-hidden pt-12 pb-24 sm:pt-20 sm:pb-32 px-6 sm:px-10 lg:px-20 min-h-[85vh] flex items-center">
+    <section className="relative isolate overflow-hidden pt-6 pb-10 sm:pt-20 sm:pb-32 px-5 sm:px-10 lg:px-20 min-h-0 sm:min-h-[85vh] flex items-center">
       {/* Background with advanced gradient layering */}
       <div className="absolute inset-0 z-0" aria-hidden>
         <img
@@ -142,70 +245,41 @@ export default function TravelHero({
         <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white to-transparent" />
       </div>
 
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center relative z-10 w-full">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 sm:gap-16 items-center relative z-10 w-full">
         {/* Left Aspect: Value Proposition */}
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="lg:col-span-7 space-y-8"
+          className="lg:col-span-7 space-y-4 sm:space-y-8 order-1"
         >
-          {/* Trust Badge */}
+          {/* Exclusive Badge */}
           <motion.div 
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-emerald-50 border border-emerald-100 px-4 py-2 rounded-2xl"
+            className="inline-flex items-center gap-1.5 sm:gap-2 bg-emerald-50 border border-emerald-100 px-2.5 py-1.5 sm:px-4 sm:py-2 rounded-2xl whitespace-nowrap max-w-full overflow-hidden"
           >
-            <div className="flex -space-x-2">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="w-6 h-6 rounded-full bg-emerald-200 border-2 border-white flex items-center justify-center text-[8px] font-bold text-emerald-700">
-                  <Users size={10} />
-                </div>
-              ))}
-            </div>
-            <span className="text-xs font-bold text-emerald-800 uppercase tracking-wider">
-              Trusted by 500+ Indian Families
+            <span className="text-emerald-500 font-black">✦</span>
+            <span className="text-[9.5px] sm:text-xs font-black text-emerald-800 uppercase tracking-wider">
+              {TRAVEL_HERO_BADGE}
             </span>
           </motion.div>
 
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] text-gray-950">
+          <h1 className="text-3xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.05] text-gray-950 [text-wrap:balance]">
             {headline}<br />
             <span className="italic font-[family-name:var(--font-playfair)] text-primary">
               {headlineAccent}
             </span>
           </h1>
 
-          <p className="max-w-xl text-lg sm:text-xl text-gray-600 leading-relaxed font-medium">
+          <p className="max-w-xl text-[15px] sm:text-xl text-gray-600 leading-relaxed font-medium [text-wrap:balance]">
             {description}
           </p>
 
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="inline-block bg-white/60 backdrop-blur-md border border-gray-100 px-5 py-2.5 rounded-2xl text-[13px] font-bold text-gray-700 shadow-sm"
-          >
-            ✦ {TRAVEL_HERO_BADGE}
-          </motion.div>
-
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <a
-              href={TRAVEL_MITR_WHATSAPP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group inline-flex items-center justify-center gap-3 bg-emerald-500 hover:bg-emerald-600 text-white text-lg font-bold px-8 py-4.5 rounded-full transition-all shadow-lg shadow-emerald-200 hover:scale-[1.02] active:scale-95"
-            >
-              <MessageCircle size={22} className="group-hover:rotate-12 transition-transform" />
-              {TRAVEL_HERO.whatsappLabel}
-            </a>
-            <a
-              href={TRAVEL_MITR_CALL_URL}
-              className="group inline-flex items-center justify-center gap-3 bg-white hover:bg-gray-50 text-gray-900 border-2 border-gray-100 text-lg font-bold px-8 py-4.5 rounded-full transition-all shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-95"
-            >
-              <Phone size={22} className="text-primary group-hover:scale-110 transition-transform" />
-              {TRAVEL_HERO.callLabel}
-            </a>
+          {/* Form on Mobile only */}
+          <div className="block lg:hidden w-full flex justify-center py-2 sm:py-4">
+             {renderForm("mobile")}
           </div>
         </motion.div>
 
@@ -214,108 +288,9 @@ export default function TravelHero({
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-          className="lg:col-span-5 w-full flex justify-center lg:justify-end"
+          className="hidden lg:flex lg:col-span-5 w-full justify-center lg:justify-end order-2"
         >
-          <div className="bg-white/80 backdrop-blur-xl rounded-[2.5rem] shadow-[0_32px_80px_rgba(0,0,0,0.08)] border border-white/50 p-8 sm:p-10 w-full max-w-md relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16 transition-transform group-hover:scale-110" />
-            
-            <div className="relative z-10">
-              <h2 className="text-3xl font-extrabold text-gray-950 mb-2 font-[family-name:var(--font-playfair)]">
-                {TRAVEL_HERO.formTitle}
-              </h2>
-              <p className="text-gray-500 mb-8 font-medium">{TRAVEL_HERO.formSubtitle}</p>
-
-              <form onSubmit={onSubmit} className="space-y-5" noValidate>
-                <div className="space-y-1.5">
-                  <label htmlFor="tm-name" className={`text-xs font-bold ml-1 uppercase tracking-wider transition-colors ${fieldErrors.name ? "text-red-500" : "text-gray-700"}`}>
-                    {TRAVEL_HERO.fields.name.label}
-                  </label>
-                  <input
-                    id="tm-name"
-                    type="text"
-                    value={form.name}
-                    onChange={update("name")}
-                    placeholder={TRAVEL_HERO.fields.name.placeholder}
-                    className={`w-full bg-gray-50/50 border rounded-2xl px-5 py-4 text-[15px] focus:bg-white focus:outline-none focus:ring-4 transition-all font-medium ${
-                      fieldErrors.name 
-                        ? "border-red-200 focus:ring-red-100 focus:border-red-400" 
-                        : "border-gray-100 focus:ring-primary/10 focus:border-primary"
-                    }`}
-                    required
-                  />
-                  {fieldErrors.name && (
-                    <p className="text-[11px] font-bold text-red-500 ml-1 animate-in fade-in slide-in-from-top-1">{fieldErrors.name}</p>
-                  )}
-                </div>
-
-                <div className="space-y-1.5">
-                  <label htmlFor="tm-phone" className={`text-xs font-bold ml-1 uppercase tracking-wider transition-colors ${fieldErrors.phone ? "text-red-500" : "text-gray-700"}`}>
-                    {TRAVEL_HERO.fields.phone.label}
-                  </label>
-                  <input
-                    id="tm-phone"
-                    type="tel"
-                    inputMode="numeric"
-                    pattern="\d{10}"
-                    value={form.phone}
-                    onChange={update("phone")}
-                    placeholder={TRAVEL_HERO.fields.phone.placeholder}
-                    className={`w-full bg-gray-50/50 border rounded-2xl px-5 py-4 text-[15px] focus:bg-white focus:outline-none focus:ring-4 transition-all font-medium ${
-                      fieldErrors.phone 
-                        ? "border-red-200 focus:ring-red-100 focus:border-red-400" 
-                        : "border-gray-100 focus:ring-primary/10 focus:border-primary"
-                    }`}
-                    required
-                  />
-                  {fieldErrors.phone && (
-                    <p className="text-[11px] font-bold text-red-500 ml-1 animate-in fade-in slide-in-from-top-1">{fieldErrors.phone}</p>
-                  )}
-                </div>
-
-                <div className="space-y-1.5">
-                  <label htmlFor="tm-age" className={`text-xs font-bold ml-1 uppercase tracking-wider transition-colors ${fieldErrors.age ? "text-red-500" : "text-gray-700"}`}>
-                    {TRAVEL_HERO.fields.age.label}
-                  </label>
-                  <input
-                    id="tm-age"
-                    type="number"
-                    inputMode="numeric"
-                    min={18}
-                    max={110}
-                    value={form.age}
-                    onChange={update("age")}
-                    placeholder={TRAVEL_HERO.fields.age.placeholder}
-                    className={`w-full bg-gray-50/50 border rounded-2xl px-5 py-4 text-[15px] focus:bg-white focus:outline-none focus:ring-4 transition-all font-medium ${
-                      fieldErrors.age 
-                        ? "border-red-200 focus:ring-red-100 focus:border-red-400" 
-                        : "border-gray-100 focus:ring-primary/10 focus:border-primary"
-                    }`}
-                    required
-                  />
-                  {fieldErrors.age && (
-                    <p className="text-[11px] font-bold text-red-500 ml-1 animate-in fade-in slide-in-from-top-1">{fieldErrors.age}</p>
-                  )}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={status === "submitting"}
-                  className="w-full bg-primary hover:bg-primary/90 disabled:opacity-60 text-white text-lg font-bold py-4.5 rounded-full transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:translate-y-[-2px] active:translate-y-0 mt-2"
-                >
-                  {status === "submitting" ? "Sending Details…" : TRAVEL_HERO.formCtaLabel}
-                </button>
-
-                {status === "success" && (
-                  <p className="text-sm font-bold text-emerald-600 text-center mt-4">
-                    ✓ Success! We&apos;ll call you shortly.
-                  </p>
-                )}
-                {status === "error" && errorMsg && !Object.keys(fieldErrors).length && (
-                  <p className="text-sm font-medium text-red-500 text-center mt-4">{errorMsg}</p>
-                )}
-              </form>
-            </div>
-          </div>
+          {renderForm("desktop")}
         </motion.div>
       </div>
     </section>
