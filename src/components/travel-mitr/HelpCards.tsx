@@ -9,11 +9,11 @@ export type HelpCardData = {
   heading: string;
   subtitle: string;
   bulletMarker?: string;
-  cards: Array<{
+  cards: ReadonlyArray<{
     title: string;
     subtitle?: string;
     iconType?: string;
-    points: string[];
+    points: ReadonlyArray<string>;
   }>;
 };
 

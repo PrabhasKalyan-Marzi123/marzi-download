@@ -5,7 +5,7 @@ import { MessageCircle, MapPin, CheckCircle, ArrowRight } from "lucide-react";
 
 export type HowItWorksData = {
   heading: string;
-  steps: Array<{
+  steps: ReadonlyArray<{
     number: string;
     title: string;
     description: string;

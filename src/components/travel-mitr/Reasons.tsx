@@ -6,7 +6,7 @@ import { Check } from "lucide-react";
 export type ReasonsData = {
   header: string;
   heading: string;
-  items: Array<{
+  items: ReadonlyArray<{
     title: string;
     quote: string;
   }>;

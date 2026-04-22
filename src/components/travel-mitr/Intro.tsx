@@ -9,11 +9,11 @@ export type IntroData = {
     type: "masterpiece";
     headline: string;
     accent: string;
-    pitfalls: Array<{ text: string; highlight: string; type: "spend" | "compromise" }>;
+    pitfalls: ReadonlyArray<{ text: string; highlight: string; type: "spend" | "compromise" }>;
   };
   cardTitle: string;
   cardSubtitle: string;
-  checkpoints: string[];
+  checkpoints: ReadonlyArray<string>;
 };
 
 type IntroProps = {
@@ -88,7 +88,7 @@ export default function Intro({ data, layout = "centered" }: IntroProps) {
     }
     return (
       <div className={`text-2xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 leading-tight mx-auto font-[family-name:var(--font-playfair)] [text-wrap:balance] ${layout === "centered" ? "max-w-2xl" : "max-w-none text-left"}`}>
-        {data.heading}
+        {data.heading as React.ReactNode}
       </div>
     );
   };

@@ -289,5 +289,5 @@ export const SAVINGS_CONTENT = {
     heading: "Want to plan a trip without overspending?",
     subtitle: "Talk to a Marzi Travel Advisor and make better travel decisions.",
   }
-};
+} as const;
 
