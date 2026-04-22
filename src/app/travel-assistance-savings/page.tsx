@@ -39,8 +39,7 @@ export default function TravelMitrSavingsPage() {
         description={SAVINGS_CONTENT.hero.description}
         source={INQUIRY_SOURCE.SAVINGS}
       />
-      <Intro data={SAVINGS_CONTENT.intro} />
-      <HelpCards data={SAVINGS_CONTENT.help} />
+      <Intro data={SAVINGS_CONTENT.intro} layout="split" />
       <Reasons data={SAVINGS_CONTENT.reasons} />
       <HowItWorks data={SAVINGS_CONTENT.how} />
       <StillUnsure data={SAVINGS_CONTENT.unsure} />

@@ -49,14 +49,14 @@ const itemVariants: Variants = {
 
 export default function HelpCards({ data }: HelpCardsProps) {
   return (
-    <section className="bg-white py-24 sm:py-32 px-6 sm:px-10 lg:px-20 relative overflow-hidden">
+    <section className="bg-white py-16 sm:py-32 px-5 sm:px-10 lg:px-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center mb-20 space-y-4">
+        <div className="text-center mb-12 sm:mb-20 space-y-3 sm:space-y-4">
           <motion.span
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="inline-block text-primary font-bold tracking-[0.2em] text-xs uppercase bg-primary/5 px-4 py-1.5 rounded-full"
+            className="inline-block text-primary font-bold tracking-[0.2em] text-[10px] sm:text-xs uppercase bg-primary/5 px-4 py-1.5 rounded-full"
           >
             {data.header}
           </motion.span>
@@ -66,7 +66,7 @@ export default function HelpCards({ data }: HelpCardsProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 leading-tight max-w-3xl mx-auto font-[family-name:var(--font-playfair)]"
+            className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-gray-950 leading-tight max-w-3xl mx-auto font-[family-name:var(--font-playfair)]"
           >
             {data.heading}
           </motion.h2>
@@ -77,53 +77,53 @@ export default function HelpCards({ data }: HelpCardsProps) {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-8 lg:gap-10"
         >
           {data.cards.map((card, idx) => (
             <motion.div
               key={card.title}
               variants={itemVariants}
-              whileHover={{ y: -10 }}
-              className="group relative bg-[#F9F7F5] border border-[#EDE8E4] rounded-[2.5rem] p-10 sm:p-12 transition-all hover:shadow-[0_40px_80px_rgba(0,0,0,0.06)] hover:bg-white"
+              whileHover={{ y: -8, boxShadow: "0 40px 80px -20px rgba(0,0,0,0.08)" }}
+              className="group relative bg-white border border-gray-100/80 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-14 transition-all duration-500 overflow-hidden"
             >
-              <div className="flex items-center gap-5 mb-8">
-                <div className="w-14 h-14 rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all transform group-hover:rotate-6">
+              <div className="flex items-center gap-4 sm:gap-5 mb-6 sm:mb-8">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl bg-white shadow-sm flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all transform group-hover:rotate-6">
                    {card.iconType && ICONS[card.iconType] ? (
-                     ICONS[card.iconType]
+                     <span className="scale-75 sm:scale-100">{ICONS[card.iconType]}</span>
                    ) : (
-                     <Check size={24} strokeWidth={2.5} />
+                     <Check size={20} className="sm:w-6 sm:h-6" strokeWidth={2.5} />
                    )}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-extrabold text-gray-950 font-[family-name:var(--font-playfair)]">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-gray-950 font-[family-name:var(--font-playfair)]">
                     {card.title}
                   </h3>
                   {card.subtitle && (
-                    <p className="text-xs text-gray-400 font-bold uppercase tracking-widest">{card.subtitle}</p>
+                    <p className="text-[10px] sm:text-xs text-gray-400 font-bold uppercase tracking-widest">{card.subtitle}</p>
                   )}
                 </div>
               </div>
 
-              <ul className="space-y-5">
+              <ul className="space-y-3 sm:space-y-5">
                 {card.points.map((point) => (
                   <li
                     key={point}
-                    className="flex items-start gap-4 text-[15px] sm:text-[17px] text-gray-700 leading-relaxed font-bold"
+                    className="flex items-start gap-3 sm:gap-4 text-[14px] sm:text-[17px] text-gray-700 leading-relaxed font-bold"
                   >
-                    <span className="mt-1 flex-shrink-0 w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center text-orange-500 group-hover:bg-orange-500 group-hover:text-white transition-colors">
+                    <span className="mt-1 flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 group-hover:bg-emerald-500 group-hover:text-white transition-colors duration-300">
                       {data.bulletMarker ? (
-                        <span className="text-sm font-black">{data.bulletMarker}</span>
+                        <span className="text-[10px] sm:text-[12px] font-black">{data.bulletMarker}</span>
                       ) : (
-                        <Check size={14} strokeWidth={4} />
+                        <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3" strokeWidth={4} />
                       )}
                     </span>
-                    <span className="group-hover:text-gray-950 transition-colors uppercase first-letter:uppercase">{point}</span>
+                    <span className="group-hover:text-gray-950 transition-colors">{point}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Decorative accent */}
-              <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-opacity">
+              {/* Decorative accent - hide on mobile to save visual weight */}
+              <div className="hidden sm:block absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-10 transition-opacity">
                 <Compass size={120} className="text-primary rotate-12" />
               </div>
             </motion.div>

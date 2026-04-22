@@ -40,7 +40,6 @@ export default function TravelMitrPage() {
         source={INQUIRY_SOURCE.LANDING}
       />
       <Intro data={LANDING_CONTENT.intro} />
-      <HelpCards data={LANDING_CONTENT.help} />
       <Reasons data={LANDING_CONTENT.reasons} />
       <HowItWorks data={LANDING_CONTENT.how} />
       <StillUnsure data={LANDING_CONTENT.unsure} />

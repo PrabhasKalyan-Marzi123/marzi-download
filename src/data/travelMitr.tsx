@@ -40,7 +40,7 @@ export const TRAVEL_HERO = {
   headline: "Planning a trip?",
   headlineAccent: "Travel without confusion or worry.",
   description:
-    "Talk to Marzi Travel Mitr — friendly travel guidance for travellers 50+. Get clear answers on bookings, health, safety, and what to expect on the way.",
+    "A real person who helps you plan every step simply, clearly, and with confidence.",
   whatsappLabel: "Chat on WhatsApp",
   callLabel: "Talk to a Travel Advisor",
   formTitle: "Get Started",
@@ -58,64 +58,64 @@ export const LANDING_CONTENT = {
   intro: {
     heading: (
       <>
-        Too many travel options. Too many apps.<br />
-        <span className="text-primary underline decoration-primary/20 decoration-4 underline-offset-8">It’s hard to know what’s right</span> — especially when comfort, safety, and pace matter.
+        Too many travel options.<br />
+        <span className="text-primary">It’s hard to know what’s right</span> especially when comfort, safety, and pace matter.
       </>
     ),
-    cardTitle: "Marzi Travel Mitr is your personal travel advisor.",
-    cardSubtitle: "A real person who helps you plan every step — simply, clearly, and with confidence.",
+    cardTitle: "Expert navigation for your next journey.",
+    cardSubtitle: "Your personal navigator: simplifying the path ahead so you can move forward with total certainty.",
     checkpoints: [
-      "Speak to a real advisor (not a bot)",
-      "Guidance designed for 50+ travellers",
-      "Simple, clear answers — no confusion"
+      "Speak to a real advisor (not a bot).",
+      "Guidance designed for 50+ travellers.",
+      "Simple, clear answers — no confusion."
     ]
   },
   help: {
     header: "What We Help You With",
-    heading: "Whatever you’re unsure about - we guide you.",
+    heading: "Expert clarity for every challenge.",
     subtitle: "Whatever you’re unsure about — we guide you.",
     cards: [
       {
         title: "Before You Travel",
         points: [
-          "What documents you need to carry",
-          "How to plan a route that suits your pace",
-          "Packing tips for comfortable travel",
-          "Planning your first solo or couple trip",
+          "What documents you need to carry.",
+          "How to plan a route that suits your pace.",
+          "Packing tips for comfortable travel.",
+          "Planning your first solo or couple trip.",
         ],
       },
       {
         title: "Booking Guidance",
         points: [
-          "Which flights, trains, or routes are easiest",
-          "How to avoid confusing booking platforms",
-          "Senior citizen discounts you may miss",
-          "Choosing safe, comfortable stays",
+          "Which flights, trains, or routes are easiest.",
+          "How to avoid confusing booking platforms.",
+          "Senior citizen discounts you may miss.",
+          "Choosing safe, comfortable stays.",
         ],
       },
       {
         title: "Health & Safety",
         points: [
-          "Medicines you can carry (and how)",
-          "Staying safe in unfamiliar places",
-          "What to do if you feel unwell while travelling",
-          "Emergency planning and contacts",
+          "Medicines you can carry (and how).",
+          "Staying safe in unfamiliar places.",
+          "What to do if you feel unwell while travelling.",
+          "Emergency planning and contacts.",
         ],
       },
       {
         title: "During Your Trip",
         points: [
-          "Help with local transport and navigation",
-          "Food choices that are safe and suitable",
-          "Staying connected with family",
-          "Someone to call if anything feels off",
+          "Help with local transport and navigation.",
+          "Food choices that are safe and suitable.",
+          "Staying connected with family.",
+          "Someone to call if anything feels off.",
         ],
       },
     ],
   },
   reasons: {
     header: "Why Marzi Travel Mitr",
-    heading: "Travel today can feel complicated. We make it simple, safe, and comfortable.",
+    heading: "Travel, refined. We handle the complexity so you can focus on the experience.",
     items: [
       {
         title: "Personal Guidance",
@@ -166,87 +166,97 @@ export const SAVINGS_CONTENT = {
   hero: {
     headline: "Planning a trip?",
     headlineAccent: "Don’t overpay for the wrong choices.",
-    description: "Marzi Travel Mitr — Better travel choices. Better prices. No compromise on comfort.",
+    description: "Smart choices. Strategic savings. Absolute comfort. We ensure every trip is high-value and zero-stress.",
   },
   intro: {
-    heading: (
-      <>
-        Most travellers either overspend without realising or compromise on comfort to save money.
-        <br />
-        <span className="text-primary underline decoration-primary/20 decoration-4 underline-offset-8">Get the best value</span> — without compromising on quality.
-      </>
-    ),
-    cardTitle: "Spend right, travel better.",
+    heading: {
+      type: "masterpiece",
+      headline: "Superior Travel Standards. Strategic Price Advantage.",
+      accent: "Price Advantage.",
+      pitfalls: [
+        { 
+          text: "The Value Upgrade: We find superior stays and flights within your existing budget.", 
+          highlight: "within your existing budget.", 
+          type: "spend" 
+        },
+        { 
+          text: "Cost Intelligence: Identifying premium choices that actually cost you less.", 
+          highlight: "actually cost you less.", 
+          type: "compromise" 
+        }
+      ]
+    },
+    cardTitle: "Strategic spending. Superior travel.",
     cardSubtitle: "Marzi Travel Mitr helps you get the best value without compromising on quality.",
     checkpoints: [
-      "Pay only for what actually matters",
-      "Avoid overpriced or unsuitable options",
-      "Get comfortable, well-planned travel within your budget"
+      "Pay only for what actually matters.",
+      "Avoid overpriced or unsuitable options.",
+      "Get comfortable, well-planned travel within your budget."
     ]
   },
   help: {
-    header: "What We Help You Save On",
-    heading: "Smart choices = better travel without unnecessary spend",
-    subtitle: "Real advice that keeps more money in your pocket.",
+    header: "Strategic Value Areas",
+    heading: "Strategic travel choices that protect both your comfort and your budget.",
+    subtitle: "Expert insights that ensure every rupee spent is high-value.",
     bulletMarker: "✦",
     cards: [
       {
         title: "Booking Smarter",
         iconType: "flights",
         points: [
-          "Which flights and trains offer best value (not just lowest price)",
-          "When to book to avoid peak pricing",
-          "Avoiding hidden costs across platforms",
-          "Using senior citizen discounts effectively",
+          "Which flights and trains offer best value (not just lowest price).",
+          "When to book to avoid peak pricing.",
+          "Avoiding hidden costs across platforms.",
+          "Using senior citizen discounts effectively.",
         ],
       },
       {
         title: "Stay Selection",
         iconType: "hotels",
         points: [
-          "Choosing hotels that are worth the price",
-          "Avoiding expensive but inconvenient locations",
-          "Getting comfort without overpaying for luxury you don’t need",
-          "Finding safe and well-rated stays within budget",
+          "Choosing hotels that are worth the price.",
+          "Avoiding expensive but inconvenient locations.",
+          "Getting comfort without overpaying for luxury you don’t need.",
+          "Finding safe and well-rated stays within budget.",
         ],
       },
       {
         title: "Trip Planning",
         iconType: "transport",
         points: [
-          "Optimising itinerary to reduce unnecessary travel costs",
-          "Avoiding expensive last-minute decisions",
-          "Choosing the right number of days for value",
-          "Balancing experiences vs spend",
+          "Optimising itinerary to reduce unnecessary travel costs.",
+          "Avoiding expensive last-minute decisions.",
+          "Choosing the right number of days for value.",
+          "Balancing experiences vs spend.",
         ],
       },
       {
         title: "During Your Trip",
         iconType: "health",
         points: [
-          "Avoiding tourist pricing traps",
-          "Choosing reliable and fairly priced local transport",
-          "Eating well without overspending",
-          "Knowing where not to spend",
+          "Avoiding tourist pricing traps.",
+          "Choosing reliable and fairly priced local transport.",
+          "Eating well without overspending.",
+          "Knowing where not to spend.",
         ],
       },
     ],
   },
   reasons: {
     header: "Why Marzi Travel Mitr",
-    heading: "Travel is not about spending more. It’s about spending right.",
+    heading: "Travelling better isn’t about spending more. It’s about choosing smarter.",
     items: [
       {
-        title: "Save Smart",
-        quote: "Save money without cutting comfort on your trip",
+        title: "Strategic Value",
+        quote: "Maximize every rupee without cutting comfort on your trip",
       },
       {
         title: "Practical Advice",
         quote: "Guidance based on real travel experience and insights",
       },
       {
-        title: "Clear Choices",
-        quote: "Simple, clear guidance — no more confusing travel options",
+        title: "Expert Clarity",
+        quote: "Direct, expert guidance — no more confusing travel options",
       },
       {
         title: "Designed for 50+",
