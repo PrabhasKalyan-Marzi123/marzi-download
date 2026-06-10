@@ -28,9 +28,56 @@ export const TRAVEL_INQUIRY_ENDPOINT = `${API_BASE_URL}/api/home/travel-inquiry/
 export const INQUIRY_SOURCE = {
   LANDING: "travel_mitr_landing",
   SAVINGS: "travel_mitr_savings",
+  BALI: "travel_mitr_bali",
+  EUROPE: "travel_mitr_europe",
+  VIETNAM: "travel_mitr_vietnam",
+  KASHMIR: "travel_mitr_kashmir",
 } as const;
 
 export type InquirySource = (typeof INQUIRY_SOURCE)[keyof typeof INQUIRY_SOURCE];
+
+export const DESTINATIONS_CONTENT = {
+  BALI: {
+    hero: {
+      headline: "Planning to visit Bali soon?",
+      headlineAccent: <>Don’t overpay for <br className="sm:hidden" />the wrong choices.</>,
+      subHeadline: "3N Kuta | 2N Ubud",
+      description: "Kuta brings the buzz. Ubud brings the calm. Together, they make Bali complete. Five nights designed to give you both, without missing a thing.",
+      backgroundImage: "/bali.avif",
+    },
+    source: INQUIRY_SOURCE.BALI,
+  },
+  EUROPE: {
+    hero: {
+      headline: "Planning to visit Europe soon?",
+      headlineAccent: <>Don’t overpay for <br className="sm:hidden" />the wrong choices.</>,
+      subHeadline: "2N Rome | 1N Pisa | 2N Venice | 3N Zurich | 2N Frankfurt",
+      description: "Rome, Pisa, Venice, Zurich, Frankfurt — 10 nights, zero compromise. Every stop curated, every detail handled.",
+      backgroundImage: "/europe.avif",
+    },
+    source: INQUIRY_SOURCE.EUROPE,
+  },
+  VIETNAM: {
+    hero: {
+      headline: "Planning to visit Vietnam soon?",
+      headlineAccent: <>Don’t overpay for <br className="sm:hidden" />the wrong choices.</>,
+      subHeadline: "3N Da Nang | 3N Phu Quoc | 1N Hanoi | 1N Halong Bay | 1N Ho Chi Minh",
+      description: "Da Nang, Phu Quoc, Hanoi, Ha Long Bay, Ho Chi Minh — Vietnam in full. We pace it right so you feel everything.",
+      backgroundImage: "/vietnam.avif",
+    },
+    source: INQUIRY_SOURCE.VIETNAM,
+  },
+  KASHMIR: {
+    hero: {
+      headline: "Planning to visit Kashmir soon?",
+      headlineAccent: <>Don’t overpay for <br className="sm:hidden" />the wrong choices.</>,
+      subHeadline: "2N Pahalgam | 4N Sri Nagar",
+      description: "Meadows in Pahalgam, lakes in Srinagar — Kashmir has layers. We help you discover all of them.",
+      backgroundImage: "/kashmir.avif",
+    },
+    source: INQUIRY_SOURCE.KASHMIR,
+  },
+} as const;
 
 // Variant copy for the /travel-assistance-savings route. Same form, same sections —
 // only the hero headline + sub-copy differ. Pass these as props to <TravelHero />.

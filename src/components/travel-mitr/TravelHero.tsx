@@ -34,16 +34,20 @@ function extractErrorMessage(payload: unknown, fallback: string): string {
 
 type TravelHeroProps = {
   headline?: string;
-  headlineAccent?: string;
+  headlineAccent?: React.ReactNode;
+  subHeadline?: string;
   description?: string;
   source?: InquirySource;
+  backgroundImage?: string;
 };
 
 export default function TravelHero({
   headline = TRAVEL_HERO.headline,
   headlineAccent = TRAVEL_HERO.headlineAccent,
+  subHeadline,
   description = TRAVEL_HERO.description,
   source = INQUIRY_SOURCE.LANDING,
+  backgroundImage = "/travel-hero.png",
 }: TravelHeroProps = {}) {
   const [form, setForm] = useState<FormState>(EMPTY_FORM);
   const [fieldErrors, setFieldErrors] = useState<{ [K in keyof FormState]?: string }>({});
@@ -237,7 +241,7 @@ export default function TravelHero({
       {/* Background with advanced gradient layering */}
       <div className="absolute inset-0 z-0" aria-hidden>
         <img
-          src="/travel-hero.png"
+          src={backgroundImage}
           alt=""
           className="w-full h-full object-cover"
         />
@@ -272,6 +276,12 @@ export default function TravelHero({
               {headlineAccent}
             </span>
           </h1>
+
+          {subHeadline && (
+            <p className="text-lg sm:text-2xl text-gray-950 font-bold uppercase tracking-tight">
+              {subHeadline}
+            </p>
+          )}
 
           <p className="max-w-xl text-[15px] sm:text-xl text-gray-600 leading-relaxed font-medium [text-wrap:balance]">
             {description}
