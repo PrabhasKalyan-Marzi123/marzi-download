@@ -39,7 +39,7 @@ export type InquirySource = (typeof INQUIRY_SOURCE)[keyof typeof INQUIRY_SOURCE]
 export const DESTINATIONS_CONTENT = {
   BALI: {
     hero: {
-      headline: "Planning to visit Bali soon?",
+      headline: "Planning a Bali trip?",
       headlineAccent: <>Don’t overpay for <br className="sm:hidden" />the wrong choices.</>,
       subHeadline: "3N Kuta | 2N Ubud",
       description: "Kuta brings the buzz. Ubud brings the calm. Together, they make Bali complete. Five nights designed to give you both, without missing a thing.",
@@ -49,7 +49,7 @@ export const DESTINATIONS_CONTENT = {
   },
   EUROPE: {
     hero: {
-      headline: "Planning to visit Europe soon?",
+      headline: "Planning an Europe trip?",
       headlineAccent: <>Don’t overpay for <br className="sm:hidden" />the wrong choices.</>,
       subHeadline: "2N Rome | 1N Pisa | 2N Venice | 3N Zurich | 2N Frankfurt",
       description: "Rome, Pisa, Venice, Zurich, Frankfurt — 10 nights, zero compromise. Every stop curated, every detail handled.",
@@ -59,7 +59,7 @@ export const DESTINATIONS_CONTENT = {
   },
   VIETNAM: {
     hero: {
-      headline: "Planning to visit Vietnam soon?",
+      headline: "Planning a Vietnam trip?",
       headlineAccent: <>Don’t overpay for <br className="sm:hidden" />the wrong choices.</>,
       subHeadline: "3N Da Nang | 3N Phu Quoc | 1N Hanoi | 1N Halong Bay | 1N Ho Chi Minh",
       description: "Da Nang, Phu Quoc, Hanoi, Ha Long Bay, Ho Chi Minh — Vietnam in full. We pace it right so you feel everything.",
@@ -69,7 +69,7 @@ export const DESTINATIONS_CONTENT = {
   },
   KASHMIR: {
     hero: {
-      headline: "Planning to visit Kashmir soon?",
+      headline: "Planning a Kashmir trip?",
       headlineAccent: <>Don’t overpay for <br className="sm:hidden" />the wrong choices.</>,
       subHeadline: "2N Pahalgam | 4N Sri Nagar",
       description: "Meadows in Pahalgam, lakes in Srinagar — Kashmir has layers. We help you discover all of them.",
