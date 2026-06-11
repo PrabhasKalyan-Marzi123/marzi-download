@@ -28,10 +28,10 @@ export const TRAVEL_INQUIRY_ENDPOINT = `${API_BASE_URL}/api/home/travel-inquiry/
 export const INQUIRY_SOURCE = {
   LANDING: "travel_mitr_landing",
   SAVINGS: "travel_mitr_savings",
-  BALI: "travel_mitr_bali",
-  EUROPE: "travel_mitr_europe",
-  VIETNAM: "travel_mitr_vietnam",
-  KASHMIR: "travel_mitr_kashmir",
+  BALI: "travel_mitr_savings", // Temporarily mapped to savings to prevent 400 error
+  EUROPE: "travel_mitr_savings", // Temporarily mapped to savings to prevent 400 error
+  VIETNAM: "travel_mitr_savings", // Temporarily mapped to savings to prevent 400 error
+  KASHMIR: "travel_mitr_savings", // Temporarily mapped to savings to prevent 400 error
 } as const;
 
 export type InquirySource = (typeof INQUIRY_SOURCE)[keyof typeof INQUIRY_SOURCE];
@@ -55,7 +55,7 @@ export const DESTINATIONS_CONTENT = {
       description: "Rome, Pisa, Venice, Zurich, Frankfurt — 10 nights, zero compromise. Every stop curated, every detail handled.",
       backgroundImage: "/europe.avif",
     },
-    source: INQUIRY_SOURCE.EUROPE,
+    source: INQUIRY_SOURCE.SAVINGS,
   },
   VIETNAM: {
     hero: {
